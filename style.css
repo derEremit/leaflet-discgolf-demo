@@ -1,5 +1,14 @@
 @import "leaflet/dist/leaflet.css";
 
+body {
+  padding: 0;
+  margin: 0;
+}
+html, body, #map {
+  height: 100%;
+  width: 100vw;
+}
+
 #map {
-  height: 95vh;
+  height: 100vh;
 }

@@ -28,10 +28,11 @@ var greenIcon = L.icon({
 
 var map = new L.Map('map')
 .addLayer(osm)
+.fitWorld()
 // todo get location from device
 //.setView(new L.LatLng(52.265, 10.524), 14);
 
-map.locate({setView: true, watch: false, maxZoom: 10});
+map.locate({setView: true, watch: false, maxZoom: 9});
 //map.on('locationfound', onLocationFound);
 
 var opl = new L.OverPassLayer({
@@ -42,3 +43,14 @@ var opl = new L.OverPassLayer({
 });
 
 map.addLayer(opl);
+
+function onLocationFound(e) {
+    var radius = e.accuracy;
+
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+}
+
+map.on('locationfound', onLocationFound);
